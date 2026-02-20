@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
             correctId.equals(inputId) && correctPass.equals(inputPass)) {
 
             // ログイン成功：メイン画面（main.jsp）へ移動
-            response.sendRedirect("/main.jsp");
+            response.sendRedirect("/todo");
 
         } else {
 

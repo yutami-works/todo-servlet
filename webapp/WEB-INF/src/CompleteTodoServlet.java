@@ -26,9 +26,10 @@ public class CompleteTodoServlet extends HttpServlet {
 
             try {
                 Class.forName("org.postgresql.Driver");
-                String url = "jdbc:postgresql://db:5432/todo_db";
-                String user = "todo_user";
-                String pass = "todo_password";
+                // 環境変数が設定されていればそれを使い、なければローカルの設定を使う
+                String url = System.getenv("DB_URL") != null ? System.getenv("DB_URL") : "jdbc:postgresql://db:5432/todo_db";
+                String user = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : "todo_user";
+                String pass = System.getenv("DB_PASS") != null ? System.getenv("DB_PASS") : "todo_password";
 
                 // UPDATE文で、指定されたIDのタスクだけ is_completed を TRUE に書き換える
                 try (Connection conn = DriverManager.getConnection(url, user, pass);

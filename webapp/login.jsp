@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ToDo Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css?v=2">
 </head>
 <body>
     <div class="login-container">

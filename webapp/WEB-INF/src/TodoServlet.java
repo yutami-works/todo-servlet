@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+// 作成したTaskDtoクラスをインポートして使えるようにします
+import com.todo.dto.TaskDto;
+
 @WebServlet("/todo")
 public class TodoServlet extends HttpServlet {
 
@@ -18,38 +21,33 @@ public class TodoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Task> taskList = new ArrayList<>();
+        List<TaskDto> taskList = new ArrayList<>();
 
         try {
-            // 1. PostgreSQLのJDBCドライバを読み込む（古いJavaの作法）
             Class.forName("org.postgresql.Driver");
-
-            // 2. DBへの接続情報（docker-compose.ymlで設定した値）
             String url = "jdbc:postgresql://db:5432/todo_db";
             String user = "todo_user";
             String pass = "todo_password";
 
-            // 3. DBに接続し、SQLを実行する
             try (Connection conn = DriverManager.getConnection(url, user, pass);
                  PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tasks ORDER BY priority ASC, id ASC");
                  ResultSet rs = stmt.executeQuery()) {
 
-                // 4. 結果を1行ずつ取り出して Task オブジェクトに詰め、リストに追加する
                 while (rs.next()) {
-                    Task task = new Task();
-                    task.id = rs.getInt("id");
-                    task.taskName = rs.getString("task_name");
-                    task.priority = rs.getInt("priority");
-                    task.isCompleted = rs.getBoolean("is_completed");
+                    TaskDto task = new TaskDto();
+                    // セッターを使ってデータを格納します
+                    task.setId(rs.getInt("id"));
+                    task.setTaskName(rs.getString("task_name"));
+                    task.setPriority(rs.getInt("priority"));
+                    task.setIsCompleted(rs.getBoolean("is_completed"));
 
                     taskList.add(task);
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(); // エラー時はTomcatのログに出力
+            e.printStackTrace();
         }
 
-        // 5. 取得したToDoリストをリクエストにセットして、main.jspに転送する
         request.setAttribute("taskList", taskList);
         request.getRequestDispatcher("/main.jsp").forward(request, response);
     }

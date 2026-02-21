@@ -1,3 +1,6 @@
+/* ================================
+   全体共通・ログイン画面用
+================================ */
 body {
     font-family: sans-serif;
     background-color: #f4f4f9;
@@ -43,4 +46,70 @@ button {
 }
 button:hover {
     background-color: #004494;
+}
+
+/* ================================
+   ToDoリスト画面用
+================================ */
+.todo-container {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 450px;
+}
+.task-list {
+    list-style-type: none;
+    padding: 0;
+}
+.task-list li {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+.priority {
+    font-weight: bold;
+    margin-right: 15px;
+    min-width: 40px;
+}
+.p1 { color: #dc3545; } /* 高：赤 */
+.p2 { color: #fd7e14; } /* 中：オレンジ */
+.p3 { color: #28a745; } /* 低：緑 */
+
+/* 完了時の打ち消し線とグレーアウト */
+.task-completed {
+    text-decoration: line-through;
+    color: #a0a0a0;
+    background-color: #f8f9fa;
+}
+.task-completed .priority {
+    color: #a0a0a0;
+}
+
+.complete-btn {
+    width: auto;
+    padding: 5px 12px;
+    font-size: 12px;
+    background-color: #6c757d;
+}
+.complete-btn:hover {
+    background-color: #5a6268;
+}
+.add-form {
+    display: flex;
+    gap: 10px;
+}
+.add-form input[type="text"] {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+.add-form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.add-form button {
+    width: auto;
+    padding: 10px 20px;
 }

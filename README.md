@@ -22,24 +22,24 @@
 ## 🚀 ローカル環境の構築手順
 
 ### 1. リポジトリのクローン
-\`\`\`bash
+```bash
 git clone <リポジトリURL>
 cd todo-servlet
-\`\`\`
+```
 
 ### 2. 環境変数ファイル（.env）の作成
 プロジェクトの直下に `.env` ファイルを作成し、以下の内容を記述。
 
-\`\`\`properties
+```properties
 # ログイン画面用のIDとパスワード
 APP_LOGIN_ID=admin
 APP_LOGIN_PASS=secret123
-\`\`\`
+```
 
 ### 3. Dockerコンテナの起動
-\`\`\`bash
+```bash
 docker-compose up -d
-\`\`\`
+```
 起動後、ブラウザで `http://localhost:8080/login.jsp` にアクセスしてログイン画面が表示されれば成功。
 ※初回起動時、PostgreSQLには `init.sql` によってテストデータが自動的に投入される。
 

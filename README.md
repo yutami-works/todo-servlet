@@ -53,7 +53,7 @@ Javaファイルを編集した後は、以下の手順でコンパイルと再�
 ### 1. コンテナ内に入って一括コンパイル
 パス変換が上手くいかない場合があるため、コンテナ内に入って `javac` を実行する。
 
-\`\`\`bash
+```bash
 # コンテナの中に入る
 docker-compose exec tomcat bash
 
@@ -62,13 +62,13 @@ javac -encoding UTF-8 -cp "/usr/local/tomcat/lib/servlet-api.jar:/usr/local/tomc
 
 # コンテナから出る
 exit
-\`\`\`
+```
 
 ### 2. Tomcatの再起動（変更の反映）
 コンパイルが終わったら、以下のコマンドでTomcatを再起動して新しい `.class` ファイルを読み込ませる。
-\`\`\`bash
+```bash
 docker-compose restart tomcat
-\`\`\`
+```
 ※JSPファイルやCSSファイルの変更は、コンパイルや再起動なしでブラウザを更新するだけで即座に反映される（CSSが反映されない場合は、URLの末尾に `?v=2` などのキャッシュバスティングを付与する）。
 
 ---
